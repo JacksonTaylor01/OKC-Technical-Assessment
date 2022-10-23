@@ -1,0 +1,339 @@
+---
+title: "OKC Technical Assessment"
+author: "Jackson Taylor"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(dplyr)
+library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
+SHOW_SOLUTIONS = FALSE
+library(rlang)
+```
+
+For Team A, what percentage of their shots were attempted in the 2PT zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q5}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamA <- filter(shots.df, team == "Team A")
+sizeA <- nrow(TeamA)
+sizeATwoPt <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(x <= 22 & z <= 23.75) {
+      sizeATwoPt <- sizeATwoPt + 1
+    } 
+}
+
+APercentage2PT <- sizeATwoPt / sizeA
+round(APercentage2PT, digits = 3)
+```
+
+For Team A, what percentage of their shots were attempted in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q6}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamA <- filter(shots.df, team == "Team A")
+sizeA <- nrow(TeamA)
+sizeA_NC3 <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y > 7.8) {
+      sizeA_NC3 <- sizeA_NC3 + 1
+    } 
+}
+
+APercentageNC3 <- sizeA_NC3 / sizeA
+round(APercentageNC3, digits = 3)
+```
+
+For Team A, what percentage of their shots were attempted in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q7}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamA <- filter(shots.df, team == "Team A")
+sizeA <- nrow(TeamA)
+sizeA_C3 <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y < 7.8) {
+      sizeA_C3 <- sizeA_C3 + 1
+    } 
+}
+
+APercentageC3 <- sizeA_C3 / sizeA
+round(APercentageC3, digits = 3)
+```
+
+For Team A, what was the eFG in the 2PT zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q8}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamA <- filter(shots.df, team == "Team A")
+sizeA <- nrow(TeamA)
+sizeATwoPt <- 0
+#Could just include the two point field goals variable from Q5 here, but so the code chunk stands alone I will include this code again for this question
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(x <= 22 & z <= 23.75) {
+      sizeATwoPt <- sizeATwoPt + 1
+    } 
+}
+
+sizeA2PTfgmade <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  fgmade <- TeamA[row, "fgmade"]
+  z <- sqrt(x^2 + y^2)
+  if(x <= 22 & z <= 23.75 & fgmade == 1) {
+      sizeA2PTfgmade <- sizeA2PTfgmade + 1
+    } 
+}
+
+APercentage2PT_Made <- sizeA2PTfgmade / sizeATwoPt
+round(APercentage2PT_Made, digits = 3)
+```
+
+For Team A, what was the eFG in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q9}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamA <- filter(shots.df, team == "Team A")
+sizeA <- nrow(TeamA)
+#Could just include the NC3 field goals variable from Q6 here, but so the code chunk stands alone I will include this code again for this question
+sizeA_NC3 <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y > 7.8) {
+      sizeA_NC3 <- sizeA_NC3 + 1
+    } 
+}
+
+sizeA_NC3fgmade <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  fgmade <- TeamA[row, "fgmade"]
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y > 7.8 & fgmade == 1) {
+      sizeA_NC3fgmade <- sizeA_NC3fgmade + 1
+    } 
+}
+
+APercentageNC3_Made <- sizeA_NC3fgmade / sizeA_NC3
+round(APercentageNC3_Made, digits = 3)
+```
+
+For Team A, what was the eFG in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q10}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamA <- filter(shots.df, team == "Team A")
+sizeA <- nrow(TeamA)
+#Could just include the C3 field goals variable from Q7 here, but so the code chunk stands alone I will include this code again for this question
+sizeA_C3 <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y < 7.8) {
+      sizeA_C3 <- sizeA_C3 + 1
+    } 
+}
+
+sizeA_C3fgmade <- 0
+for (row in 1:sizeA) {
+  x <- abs(TeamA[row, "x"])
+  y <- abs(TeamA[row, "y"])
+  fgmade <- TeamA[row, "fgmade"]
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y < 7.8 & fgmade == 1) {
+      sizeA_C3fgmade <- sizeA_C3fgmade + 1
+    } 
+}
+
+APercentageC3_Made <- sizeA_C3fgmade / sizeA_C3
+round(APercentageC3_Made, digits = 3)
+```
+
+For Team B, what percentage of their shots were attempted in the 2PT zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q11}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamB <- filter(shots.df, team == "Team B")
+sizeB <- nrow(TeamB)
+sizeBTwoPt <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(x <= 22 & z <= 23.75) {
+      sizeBTwoPt <- sizeBTwoPt + 1
+    } 
+}
+
+BPercentage2PT <- sizeBTwoPt / sizeB
+round(BPercentage2PT, digits = 3)
+```
+
+For Team B, what percentage of their shots were attempted in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q12}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamB <- filter(shots.df, team == "Team B")
+sizeB <- nrow(TeamB)
+sizeB_NC3 <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y > 7.8) {
+      sizeB_NC3 <- sizeB_NC3 + 1
+    } 
+}
+
+BPercentageNC3 <- sizeB_NC3 / sizeB
+round(BPercentageNC3, digits = 3)
+```
+
+For Team B, what percentage of their shots were attempted in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q13}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamB <- filter(shots.df, team == "Team B")
+sizeB <- nrow(TeamB)
+sizeB_C3 <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y < 7.8) {
+      sizeB_C3 <- sizeB_C3 + 1
+    } 
+}
+
+BPercentageC3 <- sizeB_C3 / sizeB
+round(BPercentageC3, digits = 3)
+```
+
+For Team B, what was the eFG in the 2PT zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q14}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamB <- filter(shots.df, team == "Team B")
+sizeB <- nrow(TeamB)
+#Could just include the two point field goals variable from Q11 here, but so the code chunk stands alone I will include this code again for this question
+sizeBTwoPt <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(x <= 22 & z <= 23.75) {
+      sizeBTwoPt <- sizeBTwoPt + 1
+    } 
+}
+
+sizeB2PTfgmade <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  fgmade <- TeamB[row, "fgmade"]
+  z <- sqrt(x^2 + y^2)
+  if(x <= 22 & z <= 23.75 & fgmade == 1) {
+      sizeB2PTfgmade <- sizeB2PTfgmade + 1
+    } 
+}
+
+BPercentage2PT_Made <- sizeB2PTfgmade / sizeBTwoPt
+round(BPercentage2PT_Made, digits = 3)
+```
+
+For Team B, what was the eFG in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q15}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamB <- filter(shots.df, team == "Team B")
+sizeB <- nrow(TeamB)
+#Could just include the NC3 field goals variable from Q12 here, but so the code chunk stands alone I will include this code again for this question
+sizeB_NC3 <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y > 7.8) {
+      sizeB_NC3 <- sizeB_NC3 + 1
+    } 
+}
+
+sizeB_NC3fgmade <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  fgmade <- TeamB[row, "fgmade"]
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y > 7.8 & fgmade == 1) {
+      sizeB_NC3fgmade <- sizeB_NC3fgmade + 1
+  } 
+}
+
+BPercentageNC3_Made <- sizeB_NC3fgmade / sizeB_NC3
+round(BPercentageNC3_Made, digits = 3)
+```
+
+For Team B, what was the eFG in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
+```{r Q16}
+#reading and filtering data in this chunk again so it may stand alone from the rest of the questions. 
+shots.df <- read.csv("shots_data.csv", header = TRUE, as.is = TRUE)
+
+TeamB <- filter(shots.df, team == "Team B")
+sizeB <- nrow(TeamB)
+#Could just include the C3 field goals variable from Q13 here, but so the code chunk stands alone I will include this code again for this question
+sizeB_C3 <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y < 7.8) {
+      sizeB_C3 <- sizeB_C3 + 1
+    } 
+}
+
+sizeB_C3fgmade <- 0
+for (row in 1:sizeB) {
+  x <- abs(TeamB[row, "x"])
+  y <- abs(TeamB[row, "y"])
+  fgmade <- TeamB[row, "fgmade"]
+  z <- sqrt(x^2 + y^2)
+  if(z > 23.75 & y < 7.8 & fgmade == 1) {
+      sizeB_C3fgmade <- sizeB_C3fgmade + 1
+    } 
+}
+
+BPercentageC3_Made <- sizeB_C3fgmade / sizeB_C3
+round(BPercentageC3_Made, digits = 3)
+```

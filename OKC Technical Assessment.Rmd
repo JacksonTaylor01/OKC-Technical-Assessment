@@ -34,6 +34,7 @@ for (row in 1:sizeA) {
 APercentage2PT <- sizeATwoPt / sizeA
 round(APercentage2PT, digits = 3)
 ```
+APercentage2PT = 0.693
 
 For Team A, what percentage of their shots were attempted in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q6}
@@ -55,6 +56,7 @@ for (row in 1:sizeA) {
 APercentageNC3 <- sizeA_NC3 / sizeA
 round(APercentageNC3, digits = 3)
 ```
+APercentageNC3 = 0.243
 
 For Team A, what percentage of their shots were attempted in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q7}
@@ -76,6 +78,7 @@ for (row in 1:sizeA) {
 APercentageC3 <- sizeA_C3 / sizeA
 round(APercentageC3, digits = 3)
 ```
+APercentageC3 = 0.007
 
 For Team A, what was the eFG in the 2PT zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q8}
@@ -109,6 +112,7 @@ for (row in 1:sizeA) {
 APercentage2PT_Made <- sizeA2PTfgmade / sizeATwoPt
 round(APercentage2PT_Made, digits = 3)
 ```
+APercentage2PT_Made = 0.49
 
 For Team A, what was the eFG in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q9}
@@ -142,6 +146,7 @@ for (row in 1:sizeA) {
 APercentageNC3_Made <- sizeA_NC3fgmade / sizeA_NC3
 round(APercentageNC3_Made, digits = 3)
 ```
+APercentageNC3_Made = 0.309
 
 For Team A, what was the eFG in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q10}
@@ -175,6 +180,7 @@ for (row in 1:sizeA) {
 APercentageC3_Made <- sizeA_C3fgmade / sizeA_C3
 round(APercentageC3_Made, digits = 3)
 ```
+APercentageC3_Made = 0.5
 
 For Team B, what percentage of their shots were attempted in the 2PT zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q11}
@@ -196,6 +202,7 @@ for (row in 1:sizeB) {
 BPercentage2PT <- sizeBTwoPt / sizeB
 round(BPercentage2PT, digits = 3)
 ```
+BPercentage2PT = 0.674
 
 For Team B, what percentage of their shots were attempted in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q12}
@@ -217,6 +224,7 @@ for (row in 1:sizeB) {
 BPercentageNC3 <- sizeB_NC3 / sizeB
 round(BPercentageNC3, digits = 3)
 ```
+BPercentageNC3 = 0.277
 
 For Team B, what percentage of their shots were attempted in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q13}
@@ -238,6 +246,7 @@ for (row in 1:sizeB) {
 BPercentageC3 <- sizeB_C3 / sizeB
 round(BPercentageC3, digits = 3)
 ```
+BPercentageC3 = 0.004
 
 For Team B, what was the eFG in the 2PT zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q14}
@@ -271,6 +280,7 @@ for (row in 1:sizeB) {
 BPercentage2PT_Made <- sizeB2PTfgmade / sizeBTwoPt
 round(BPercentage2PT_Made, digits = 3)
 ```
+BPercentage2PT_Made = 0.444
 
 For Team B, what was the eFG in the NC3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q15}
@@ -304,6 +314,7 @@ for (row in 1:sizeB) {
 BPercentageNC3_Made <- sizeB_NC3fgmade / sizeB_NC3
 round(BPercentageNC3_Made, digits = 3)
 ```
+BPercentageNC3_Made = 0.339
 
 For Team B, what was the eFG in the C3 zone? Rounded to 3 decimal places (e.g. 0.531).
 ```{r Q16}
@@ -337,3 +348,4 @@ for (row in 1:sizeB) {
 BPercentageC3_Made <- sizeB_C3fgmade / sizeB_C3
 round(BPercentageC3_Made, digits = 3)
 ```
+BPercentageC3_Made = 0
